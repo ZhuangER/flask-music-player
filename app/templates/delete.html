@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery{% endblock %}
+
+{% block page_content %}
+
+<h2>Are you sure you want to delete photo {{filename}}? </h2>
+<br/>
+<div text-align="center">
+	<a href="#">
+	<img src= {{ file_path }} width= "300" vertical-align= "middle">
+	</a>
+	<form action=""
+        	method=post
+        	enctype=multipart/form-data>
+        	<input type=submit value=Delete>
+    </form>
+</div>
+
+{% endblock %}
