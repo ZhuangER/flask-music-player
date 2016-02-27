@@ -40,6 +40,25 @@ var height,width;
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 box.appendChild(canvas);
+var Dots = [];
+function random(m, n){
+	return Math.round(Math.random()*(n - m) + m);
+}
+
+
+function getDots(){
+	Dots = [];
+	for (var i = 0; i < size; i++){
+		var x = random(0, width);
+		var y = random(0, height);
+		var color = "rgb(" + random(0, 255) + "," + random(0, 255) + "," +random(0, 255) + ")";
+		Dots.push({
+			x: x,
+			y: y,
+			color: color
+		});
+	}
+}
 
 
 function resize(){
@@ -47,11 +66,12 @@ function resize(){
 	width = box.clientWidth;
 	canvas.height = height;
 	canvas.width = width;
-	var line = ctx.createLinearGradient(170, 170, 170, height);
+	var line = ctx.createLinearGradient(0, 0, 0, height);
 	line.addColorStop(0, "red");
 	line.addColorStop(0.5, "yellow");
 	line.addColorStop(1, "green");
 	ctx.fillStyle = line;
+	getDots();
 }
 resize();
 
@@ -61,11 +81,31 @@ function draw(arr){
 	ctx.clearRect(0, 0, width, height);
 	var w = width / size;
 	for (var i = 0; i < size; i++){
-		var h = arr[i] / 256 * height;
-		ctx.fillRect(w * i, height - h, w*0.6, h);
+		if (draw.type == "column"){
+			var h = arr[i] / 256 * height;
+			ctx.fillRect(w * i, height - h, w*0.6, h);
+		}else if (draw.type == "dot"){
+			ctx.beginPath();
+			var o = Dots[i];
+			var r = arr[i] / 256 * 50;
+			ctx.arc(o.x, o.y, r, 0, Math.PI*2, true);
+			ctx.strokeStyle = "#fff";
+			ctx.stroke();
+		}
 	}
 }
 
+draw.type = "column";
+var types = $("#type li");
+for (var i = 0; i < types.length; i++){
+	types[i].onclick = function(){
+		for(var j = 0; j < types.length; j++){
+			types[j].className = "";
+		}
+		this.className = "selected";
+		draw.type = this.getAttribute("data-type");
+	}
+}
 
 function load(url){
 	var n = ++count;
