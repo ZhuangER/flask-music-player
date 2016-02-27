@@ -28,7 +28,9 @@ def create_app(config_name):
     basedir = path.abspath(path.dirname(__file__))
 
     UPLOAD_FOLDER = os.path.join(basedir, 'static/images')
+    MUSIC_FOLDER = os.path.join(basedir, 'static/musics')
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['MUSIC_FOLDER'] = MUSIC_FOLDER
 
     bootstrap.init_app(app)
     moment.init_app(app)
@@ -40,5 +42,8 @@ def create_app(config_name):
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from .music import music as music_blueprint
+    app.register_blueprint(music_blueprint, url_prefix='/music')
 
     return app
