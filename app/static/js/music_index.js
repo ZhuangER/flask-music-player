@@ -60,17 +60,17 @@ function getDots(){
 	}
 }
 
-
+var line;
 function resize(){
 	height = box.clientHeight;
 	width = box.clientWidth;
 	canvas.height = height;
 	canvas.width = width;
-	var line = ctx.createLinearGradient(0, 0, 0, height);
+	line = ctx.createLinearGradient(0, 0, 0, height);
 	line.addColorStop(0, "red");
 	line.addColorStop(0.5, "yellow");
 	line.addColorStop(1, "green");
-	ctx.fillStyle = line;
+
 	getDots();
 }
 resize();
@@ -80,6 +80,7 @@ window.onresize = resize;
 function draw(arr){
 	ctx.clearRect(0, 0, width, height);
 	var w = width / size;
+	ctx.fillStyle = line;
 	for (var i = 0; i < size; i++){
 		if (draw.type == "column"){
 			var h = arr[i] / 256 * height;
@@ -89,8 +90,13 @@ function draw(arr){
 			var o = Dots[i];
 			var r = arr[i] / 256 * 50;
 			ctx.arc(o.x, o.y, r, 0, Math.PI*2, true);
-			ctx.strokeStyle = "#fff";
-			ctx.stroke();
+			var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, r);
+			g.addColorStop(0, "#fff");
+			g.addColorStop(1, o.color);
+			ctx.fillStyle = g;
+			ctx.fill();
+			/*ctx.strokeStyle = "#fff";
+			ctx.stroke();*/
 		}
 	}
 }
