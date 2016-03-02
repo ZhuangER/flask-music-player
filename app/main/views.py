@@ -10,8 +10,9 @@ from .. import db
 import time
 
 
-
-
+@main.route('/healthcheck')
+def healthcheck():
+    return "200"
 
 
 """
