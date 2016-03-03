@@ -1,24 +1,18 @@
-Online Gallery
+Music Visualization
 ======
 
- Implement a online dynamic gallery with python Flask framework, js and css <br/>
+ Implement a music visualization website
+ <br/>
 
 ## Functions
-- User Register
-- User Login, Logout
-- Uploading and deleting images
-- Showing personal uploaded images in gallery
+- Music Playing
+- Music Visualization
 
 ## Usage
 Before running this project, the dependency should be installed first.
 
 ###Install dependency
 install requirement pakages which is define in requirement.txt, with command ```pip install -r requirement.txt```
-
-###Create database: 
-```python manage.py shell```
-In the shell environment <br/>
-db.create_all()
 
 
 ###Run server:
@@ -30,7 +24,6 @@ manage.py: provide commands like 'shell' and 'runserver'
 config.py: configuration file
 requirements.txt: dependency libraries
 app folder: contain main source code
-- auth: sub-module for authentication
 - main: sub-module for main functions
 - templates: html file
 - static: js, css files and store images
