@@ -4,8 +4,7 @@ from flask.ext.login import current_user, login_required
 from werkzeug.utils import secure_filename
 from . import main
 from manage import app
-from ..models import Photo
-from .. import db
+
 
 
 
